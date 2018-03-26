@@ -29,7 +29,7 @@ module.exports.transform = function(src, filename, options) {
   }
 
   if (filename.endsWith(".css")) {
-    var cssObject = css2rn(src);
+    var cssObject = css2rn(src, { parseMediaQueries: true });
 
     return upstreamTransformer.transform({
       src: "module.exports = " + JSON.stringify(cssObject),
