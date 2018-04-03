@@ -36,7 +36,6 @@ module.exports.transform = function(src, filename, options) {
       filename,
       options
     });
-  } else {
-    return upstreamTransformer.transform({ src, filename, options });
   }
+  return upstreamTransformer.transform({ src, filename, options });
 };
