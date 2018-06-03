@@ -284,17 +284,17 @@ css-mediaquery@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
 
-css-to-react-native-transform@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/css-to-react-native-transform/-/css-to-react-native-transform-1.4.0.tgz#4bb4575e15461f7e117bf15bf10d04ec0f81bb17"
+css-to-react-native-transform@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/css-to-react-native-transform/-/css-to-react-native-transform-1.6.0.tgz#1b4088c6bdb23083d88953b6f454e35c88c33f0a"
   dependencies:
     css "^2.2.1"
     css-mediaquery "^0.1.2"
-    css-to-react-native "^2.1.2"
+    css-to-react-native "^2.2.0"
 
-css-to-react-native@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.1.2.tgz#c06d628467ef961c85ec358a90f3c87469fb0095"
+css-to-react-native@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.2.0.tgz#d524ef7f39a2747a8914e86563669ba35b7cf2e7"
   dependencies:
     css-color-keywords "^1.0.0"
     fbjs "^0.8.5"
