@@ -17,7 +17,30 @@ yarn add --dev react-native-css-transformer
 
 ### Step 2: Configure the react native packager
 
-Add this to your `rn-cli.config.js` (make one if you don't have one already):
+#### For React Native v0.57 or newer
+
+Add this to your `rn-cli.config.js` (create the file if it does not exist already):
+
+```js
+const { getDefaultConfig } = require("metro-config");
+module.exports = (async () => {
+  const {
+    resolver: { sourceExts, assetExts }
+  } = await getDefaultConfig();
+  return {
+    transformer: {
+      babelTransformerPath: require.resolve("react-native-css-transformer")
+    },
+    resolver: {
+      sourceExts: [...sourceExts, "css"]
+    }
+  };
+})();
+```
+
+#### For React Native v0.56 or older
+
+Add this to your `rn-cli.config.js` (create the file if it does not exist already):
 
 ```js
 module.exports = {
