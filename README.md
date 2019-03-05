@@ -146,6 +146,41 @@ If you are using [Expo](https://expo.io/), instead of adding the `rn-cli.config.
 }
 ```
 
+## CSS Custom Properties (CSS variables)
+
+```css
+:root {
+  --text-color: blue;
+}
+
+.blue {
+  color: var(--text-color);
+}
+```
+
+CSS variables are not supported by default, but you can add support for them by using [PostCSS](https://postcss.org/) and [postcss-css-variables](https://github.com/MadLittleMods/postcss-css-variables#readme) plugin.
+
+Start by installing dependencies:
+
+```sh
+yarn add postcss postcss-css-variables react-native-postcss-transformer --dev
+```
+
+Remove CSS transformer the project:
+
+```sh
+yarn remove react-native-css-transformer
+```
+
+Add `postcss-css-variables` to your PostCSS configuration with [one of the supported config formats](https://github.com/michael-ciniawsky/postcss-load-config), e.g. `package.json`, `.postcssrc`, `postcss.config.js`, etc.
+
+After that replace the transformer name in your Metro cofig:
+
+```diff
+-require.resolve("react-native-css-transformer")
++require.resolve("react-native-postcss-transformer")
+```
+
 ## Dependencies
 
 This library has the following Node.js modules as dependencies:
