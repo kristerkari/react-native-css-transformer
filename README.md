@@ -166,7 +166,7 @@ Start by installing dependencies:
 yarn add postcss postcss-css-variables react-native-postcss-transformer --dev
 ```
 
-Remove CSS transformer the project:
+Remove CSS transformer from the project:
 
 ```sh
 yarn remove react-native-css-transformer
