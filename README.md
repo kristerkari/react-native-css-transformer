@@ -174,7 +174,7 @@ yarn remove react-native-css-transformer
 
 Add `postcss-css-variables` to your PostCSS configuration with [one of the supported config formats](https://github.com/michael-ciniawsky/postcss-load-config), e.g. `package.json`, `.postcssrc`, `postcss.config.js`, etc.
 
-After that replace the transformer name in your Metro cofig:
+After that replace the transformer name in your Metro config file (`metro.config.js`):
 
 ```diff
 -require.resolve("react-native-css-transformer")
