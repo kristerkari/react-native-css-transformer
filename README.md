@@ -73,78 +73,74 @@ You can then use that style object with an element:
 ### Step 1: Install
 
 ```sh
+npm install --save-dev react-native-css-transformer
+```
+
+or
+
+```sh
 yarn add --dev react-native-css-transformer
 ```
 
 ### Step 2: Configure the react native packager
 
-#### For React Native v0.57 or newer / Expo SDK v31.0.0 or newer
+#### For Expo SDK v41.0.0 or newer
 
-Add this to `metro.config.js` in your project's root (create the file if it does not exist already):
+Merge the contents from your project's `metro.config.js` file with this config (create the file if it does not exist already).
+
+`metro.config.js`:
 
 ```js
-const { getDefaultConfig } = require("metro-config");
+const { getDefaultConfig } = require("expo/metro-config");
 
-module.exports = (async () => {
-  const {
-    resolver: { sourceExts }
-  } = await getDefaultConfig();
-  return {
-    transformer: {
-      babelTransformerPath: require.resolve("react-native-css-transformer")
-    },
-    resolver: {
-      sourceExts: [...sourceExts, "css"]
-    }
+module.exports = (() => {
+  const config = getDefaultConfig(__dirname);
+
+  const { transformer, resolver } = config;
+
+  config.transformer = {
+    ...transformer,
+    babelTransformerPath: require.resolve("react-native-css-transformer")
   };
+  config.resolver = {
+    ...resolver,
+    sourceExts: [...sourceExts, "css"]
+  };
+
+  return config;
 })();
 ```
 
-If you are using [Expo](https://expo.io/), you also need to add this to `app.json`:
-
-```json
-{
-  "expo": {
-    "packagerOpts": {
-      "config": "metro.config.js",
-      "sourceExts": ["js", "jsx", "css"]
-    }
-  }
-}
-```
-
 ---
 
-#### For React Native v0.56 or older
+#### For React Native v0.72.1 or newer
 
-If you are using React Native without Expo, add this to `rn-cli.config.js` in your project's root (create the file if you don't have one already):
+Merge the contents from your project's `metro.config.js` file with this config (create the file if it does not exist already).
+
+`metro.config.js`:
 
 ```js
-module.exports = {
-  getTransformModulePath() {
-    return require.resolve("react-native-css-transformer");
+const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
+
+const defaultConfig = getDefaultConfig(__dirname);
+const { assetExts, sourceExts } = defaultConfig.resolver;
+
+/**
+ * Metro configuration
+ * https://reactnative.dev/docs/metro
+ *
+ * @type {import('metro-config').MetroConfig}
+ */
+const config = {
+  transformer: {
+    babelTransformerPath: require.resolve("react-native-css-transformer")
   },
-  getSourceExts() {
-    return ["js", "jsx", "css"];
+  resolver: {
+    sourceExts: [...sourceExts, "css"]
   }
 };
-```
 
----
-
-#### For Expo SDK v30.0.0 or older
-
-If you are using [Expo](https://expo.io/), instead of adding the `rn-cli.config.js` file, you need to add this to `app.json`:
-
-```json
-{
-  "expo": {
-    "packagerOpts": {
-      "sourceExts": ["js", "jsx", "css"],
-      "transformer": "node_modules/react-native-css-transformer/index.js"
-    }
-  }
-}
+module.exports = mergeConfig(defaultConfig, config);
 ```
 
 ## CSS Custom Properties (CSS variables)
@@ -187,4 +183,3 @@ After that replace the transformer name in your Metro config file (`metro.config
 This library has the following Node.js modules as dependencies:
 
 - [css-to-react-native-transform](https://github.com/kristerkari/css-to-react-native-transform)
-- [semver](https://github.com/npm/node-semver#readme)
